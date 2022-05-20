@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    @if (!String.IsNullOrEmpty(Model.Location))
+    {
+        <h4>Czas dla regionu <strong>@Model.Location</strong></h4>
+    }
+    <h1 id="time-value" class="display-1">@Model.TimeString</h1>
+    <h1 class="display-4 text-danger">@Model.ErrorMessage</h1>
+    <ul class="list-group list-group-flush">
+        @foreach (var location in Model.Locations)
+        {
+            <li class="list-group-item">@location</li>
+        }
+    </ul>
+</div>
+
+<script>
+    window.onload = function () {
+        var time = document.getElementById("time-value");
+        if (!time.innerHTML) {
+            return;
+        }
+
+        setInterval(function () {
+            let date = new Date("2000-01-01T" + time.innerHTML + ":00.000");
+            let newDate = new Date(date.getTime() + 60000);
+            var timeString = "";
+            if (newDate.getHours() < 10) {
+                timeString += "0";
+            }
+            timeString += newDate.getHours().toString() + ":";
+            if (newDate.getMinutes() < 10) {
+                timeString += "0";
+            }
+            timeString += newDate.getMinutes().toString();
+            time.innerHTML = timeString;
+        }, 60000);
+    }
+</script>
