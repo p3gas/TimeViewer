@@ -27,8 +27,8 @@
         }
 
         setInterval(function () {
-            let date = new Date("2000-01-01T" + time.innerHTML + ":00.000");
-            let newDate = new Date(date.getTime() + 60000);
+            let date = new Date("2000-01-01T" + time.innerHTML + ".000");
+            let newDate = new Date(date.getTime() + 1000);
             var timeString = "";
             if (newDate.getHours() < 10) {
                 timeString += "0";
@@ -37,8 +37,12 @@
             if (newDate.getMinutes() < 10) {
                 timeString += "0";
             }
-            timeString += newDate.getMinutes().toString();
+            timeString += newDate.getMinutes().toString() + ":";
+            if (newDate.getSeconds() < 10) {
+                timeString += "0";
+            }
+            timeString += newDate.getSeconds().toString();
             time.innerHTML = timeString;
-        }, 60000);
+        }, 1000);
     }
 </script>

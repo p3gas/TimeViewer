@@ -38,7 +38,7 @@ namespace TimeViewer1.Pages
             try
             {
                 var response = await _timeProvider.GetTime(Location);
-                TimeString = response.ToString("HH:mm");
+                TimeString = response.ToString("HH:mm:ss");
             }
             catch(ApiUnavailableException e)
             {
